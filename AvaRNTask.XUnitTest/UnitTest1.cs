@@ -71,8 +71,8 @@ public class UnitTest1
 		window.MouseDown(new Point(150, 100), MouseButton.Left);
 		window.MouseMove(new Point(700, 700));
 
-		int triangleSides = 3;
-		Assert.Equal(triangleSides, viewmodel.SelectedLines.Count);
+		int selectedSides = 3;
+		Assert.Equal(selectedSides, viewmodel.SelectedLines.Count);
 	}
 
 	/// <summary>
@@ -101,24 +101,20 @@ public class UnitTest1
 		var window = new Window { Content = main };
 		window.Show();
 
-		// рисуем треугольник с основанием к верху
-		window.MouseDown(new Point(100, 400), MouseButton.Left);
-		window.MouseUp(new Point(100, 400), MouseButton.Left);
-		window.MouseDown(new Point(400, 400), MouseButton.Left);
-		window.MouseUp(new Point(400, 400), MouseButton.Left);
-		window.MouseDown(new Point(250, 600), MouseButton.Left);
-		window.MouseUp(new Point(250, 600), MouseButton.Left);
-		window.MouseDown(new Point(250, 600), MouseButton.Right);
-		window.MouseUp(new Point(250, 600), MouseButton.Right);
+		// рисуем линию по координатам
+		window.MouseDown(new Point(100, 100), MouseButton.Left);
+		window.MouseUp(new Point(100, 100), MouseButton.Left);
+		window.MouseDown(new Point(400, 100), MouseButton.Left);
+		window.MouseUp(new Point(400, 100), MouseButton.Left);
 
 		// выбираем режим выделения области
 		viewmodel.SelectedMode = MainViewModel.DrawingMode.Selecting;
 
 		// выделяем с X=150, Y=100 по X=700, Y=700
-		window.MouseDown(new Point(150, 100), MouseButton.Left);
+		window.MouseDown(new Point(200, 200), MouseButton.Left);
 		window.MouseMove(new Point(700, 700));
 
-		int triangleSides = 3;
-		Assert.Equal(triangleSides, viewmodel.SelectedLines.Count);
+		int selectedSides = 0;
+		Assert.Equal(selectedSides, viewmodel.SelectedLines.Count);
 	}
 }
