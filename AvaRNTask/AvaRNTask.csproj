@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" />
+		<PackageReference Include="Avalonia.Themes.Fluent" />
+		<PackageReference Include="Avalonia.Fonts.Inter" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Include="Avalonia.Diagnostics">
+			<IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+		</PackageReference>
+
+		<PackageReference Include="Avalonia.Skia" />
+		
+		<PackageReference Include="Xaml.Behaviors.Avalonia" />
+		<PackageReference Include="Xaml.Behaviors.Interactivity" />
+		<PackageReference Include="Xaml.Behaviors.Interactions" />
+		<PackageReference Include="Xaml.Behaviors.Interactions.Custom" />
+		<PackageReference Include="Xaml.Behaviors.Interactions.Draggable" />
+		<PackageReference Include="Xaml.Behaviors.Interactions.DragAndDrop" />
+		<PackageReference Include="Xaml.Behaviors.Interactions.Events" />
+		<PackageReference Include="Xaml.Behaviors.Interactions.Responsive" />
+		
+		<PackageReference Include="CommunityToolkit.Mvvm" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\AvaRNTask.Backend\AvaRNTask.Backend.csproj" />
+	</ItemGroup>
+</Project>

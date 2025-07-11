@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:AvaRNTask.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+			 xmlns:bh="using:Avalonia.Interactivity"
+			 xmlns:sys="using:System"
+			 x:Class="AvaRNTask.Views.MainView"
+			 x:DataType="vm:MainViewModel">
+	<Design.DataContext>	
+		<vm:MainViewModel />
+	</Design.DataContext>
+
+	<Grid RowDefinitions="auto,*">
+		<Grid Grid.Row="0">
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<TextBlock Name="mouse_pos" VerticalAlignment="Center" Width="100" />
+				<ComboBox Name="mode_cb" SelectedIndex="{CompiledBinding SelectedMode, Mode=TwoWay}" ItemsSource="{CompiledBinding DrawingModes}" />
+				<Button Name="generate" Content="Нарисовать фигуры" />
+				<TextBlock Text="Количество фигур:" VerticalAlignment="Center" />
+				<NumericUpDown Name="shapes_count" Width="200" ParsingNumberStyle="Integer" FormatString="0" Maximum="50000" Minimum="1" />
+				<Button Name="clear_canvas" Content="Очистить канвас" />
+				<TextBlock Text="{CompiledBinding SelectedLines.Count, StringFormat='Кол-во выделенных линий: {0}'}" VerticalAlignment="Center" />
+			</StackPanel>
+		</Grid>
+
+		<Canvas Grid.Row="1" Name="canvas" Background="Beige">
+			<Rectangle Stroke="Aqua" StrokeThickness="1"
+					   IsVisible="{CompiledBinding SelectionRect}"
+					   Canvas.Left="{CompiledBinding SelectionRect.Value.Left}" Canvas.Top="{CompiledBinding SelectionRect.Value.Top}"
+					   Width="{CompiledBinding SelectionRect.Value.Width}" Height="{CompiledBinding SelectionRect.Value.Height}" />
+		</Canvas>
+	</Grid>
+</UserControl>
